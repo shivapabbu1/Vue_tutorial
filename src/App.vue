@@ -38,6 +38,16 @@
 
     <!-- v-html: Rendering raw HTML content -->
     <p>Using v-html directive: <span v-html="rawHtml"></span></p>
+
+    <!-- Conditional rendering for lists -->
+    <ul class="conditional-list">
+      <!-- v-if within v-for: Conditionally render list items based on their property -->
+      <li v-for="item in items" :key="item.id" >
+        
+         <p v-if="item.isVisible"> {{ item.name }}</p>
+        
+        </li>
+    </ul>
   </div>
 </template>
 
@@ -56,8 +66,8 @@ export default {
         backgroundColor: 'lightgray'
       },
       inputText: '',
-      isVisible: false,
-      isShow: true,
+      isVisible: true, // Set to true to show the paragraph
+      isShow: true,   // Set to true to show the paragraph
       headerStyle: {
         color: 'green',
         fontSize: '28px'
@@ -67,9 +77,9 @@ export default {
         fontWeight: 'bold'
       },
       items: [
-        { id: 1, name: 'Item 1' },
-        { id: 2, name: 'Item 2' },
-        { id: 3, name: 'Item 3' }
+        { id: 1, name: 'Item 1', isVisible: true },
+        { id: 2, name: 'Item 2', isVisible: false },
+        { id: 3, name: 'Item 3', isVisible: true }
       ],
       rawHtml: '<b>This text is bold</b> and <i>this is italic</i>'
     };
@@ -145,5 +155,12 @@ export default {
 
 .item-list li {
   padding: 5px 0;
+}
+
+/* Styling for conditional list */
+.conditional-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 20px 0;
 }
 </style>
