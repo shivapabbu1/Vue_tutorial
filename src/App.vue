@@ -1,19 +1,20 @@
 <template>
   <div id="app">
-    <FormHandle />
+    <ShoppingCart />
   </div>
 </template>
 
 <script>
-import FormHandle from "../../vue_tutorial/src/components/FormHandle.vue";
+import ShoppingCart from "../src/components/ShoppingCart.vue";
 
 export default {
   name: "App",
   components: {
-    FormHandle
+    ShoppingCart
   }
 };
 </script>
+
 
 <style>
 #app {
