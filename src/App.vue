@@ -15,20 +15,23 @@ export default {
   name: 'PriceTracker',
   data() {
     return {
-      price: 0,             // Current price of the product
+      price: 29,             // Current price of the product
       previousPrice: 0      // Store the previous price
     };
   },
   watch: {
-    // Watcher for price with old and new values
-    price(newPrice, oldPrice) {
-      console.log(`Price changed from $${oldPrice} to $${newPrice}`);
+    // Watcher for price with immediate option
+    price: {
+      handler(newPrice, oldPrice) {
+        console.log(`Price changed from $${oldPrice} to $${newPrice}`);
 
-      // Update previousPrice
-      this.previousPrice = oldPrice;
+        // Update previousPrice
+        this.previousPrice = oldPrice;
 
-      // Update discount message
-      this.updateDiscountMessage(newPrice, oldPrice);
+        // Update discount message
+        this.updateDiscountMessage(newPrice, oldPrice);
+      },
+      immediate: true  // This makes the watcher run immediately upon component creation
     }
   },
   computed: {
@@ -49,6 +52,7 @@ export default {
     }
   }
 };
+
 </script>
 
 <style>
