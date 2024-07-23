@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <EventHandling />
+    <FormHandle />
   </div>
 </template>
 
 <script>
-import EventHandling from "../../vue_tutorial/src/components/EventHandling.vue";
+import FormHandle from "../../vue_tutorial/src/components/FormHandle.vue";
 
 export default {
   name: "App",
   components: {
-    EventHandling
+    FormHandle
   }
 };
 </script>
