@@ -8,9 +8,11 @@
         {{ item.name }} - ${{ item.price }}
       </li>
     </ul>
+    <button @click="updateApplePrice()">updateApplePrice</button>
     
     <!-- Display the total price -->
-    <p>Total Price: ${{ totalPrice }}</p>
+    <p>Total Price from computed: ${{ totalPrice }}</p>
+    <p>Total price from method: ${{total()}}</p>
     
     <!-- Display the number of items -->
     <p>Number of Items: {{ numberOfItems }}</p>
@@ -21,7 +23,23 @@
     <!-- Check if eligible for free shipping -->
     <p v-if="isEligibleForFreeShipping">You are eligible for free shipping!</p>
     <p v-else>Spend $50 or more for free shipping.</p>
+
+  
+
+    <h2 v-for="item in expesive" :key="item.name">{{item.name}}</h2>
+    <div v-for="item in cartItems" :key="item.id">
+      <h2  v-if="item.price > 10">{{item.name}}</h2>
+
+
+    </div>
+
+       <!-- Input fields to demonstrate getter and setter -->
+    <p>First Name: <input type="text" v-model="firstName" /></p>
+    <p>Last Name: <input type="text" v-model="lastName" /></p>
+    <p>Full Name: <input type="text" v-model="fullName" /></p>
   </div>
+
+ 
 </template>
 
 <script>
@@ -34,12 +52,31 @@ export default {
         { id: 1, name: 'Apple', price: 10 },
         { id: 2, name: 'Banana', price: 5 },
         { id: 3, name: 'Cherry', price: 15 }
-      ]
+      ],
+       firstName: '',
+      lastName: '',
+      fullname: ''
     };
+  },
+  methods: {
+    total(){
+      console.log("total method");
+            return this.cartItems.reduce((sum, item) => sum + item.price, 0);
+
+    },
+    updateApplePrice() {
+    // Iterate over cartItems to find and update the item
+    this.cartItems.forEach(item => {
+      if (item.name === 'Apple') {
+        item.price =item.price+1; // Update the price
+      }
+    });
+  }
   },
   computed: {
     // Compute the total price of all items in the cart
     totalPrice() {
+      console.log("total method from computed proprerties");
       return this.cartItems.reduce((sum, item) => sum + item.price, 0);
     },
     
@@ -57,15 +94,28 @@ export default {
     averagePricePerItem() {
       return this.numberOfItems > 0 ? this.totalPrice / this.numberOfItems : 0;
     },
-    
+    expesive(){
+return this.cartItems.filter( item =>item.price >10);
+    },
     // Format cart items with price formatting
     formattedCartItems() {
       return this.cartItems.map(item => ({
         ...item,
         price: item.price.toFixed(2) // Format price to two decimal places
       }));
+    },
+    fullName: {
+      get() {
+        return `${this.firstName} ${this.lastName}`;
+      },
+      set(value) {
+        const names = value.split(' ');
+        this.firstName = names[0] || '';
+        this.lastName = names[1] || '';
+      }
     }
   }
+  
 };
 </script>
 
