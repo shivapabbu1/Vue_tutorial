@@ -11,7 +11,8 @@
     <form @submit.prevent="submitform">
       <!-- Name Input with .trim modifier -->
       <label for="name">Name</label>
-      <input type="text" id="name" v-model="formvalue.name" />
+      <input type="text" id="name" v-model.trim="formvalue.name" />
+
 
       <hr>
 
