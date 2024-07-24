@@ -1,82 +1,54 @@
 <template>
   <div>
-    <h1>Nested Object Tracker</h1>
-
+    <h1>Deep Watcher Example</h1>
+    
     <!-- Input fields for nested properties -->
-    <input v-model.number="product.price" type="number" placeholder="Enter product price" />
-    <input v-model="product.details.name" type="text" placeholder="Enter product name" />
-
-    <!-- Display the messages -->
-    <p>Price: {{ product.price }}</p>
-    <p>Product Name: {{ product.details.name }}</p>
-    <p>{{ changeMessage }}</p>
+    <input v-model="user.name" type="text" placeholder="Enter name" />
+    <input v-model.number="user.age" type="number" placeholder="Enter age" />
+    
+    <!-- Display messages -->
+    <p>Name: {{ user.name }}</p>
+    <p>Age: {{ user.age }}</p>
+    <p v-if="message">{{ message }}</p> <!-- Display message if not empty -->
   </div>
 </template>
 
 <script>
 export default {
-  name: 'NestedObjectTracker',
+  name: 'DeepWatcherExample',
   data() {
     return {
-      product: {
-        price: 29,
-        details: {
-          name: 'Example Product'
-        }
+      user: {
+        name: 'John Doe',
+        age: 30
       },
-      previousProduct: {} // Store the previous product state
+      previousUser: null, // Track the previous user state
+      message: '' // Data property for the change message
     };
   },
   watch: {
-    // Deep watcher for the product object
-    product: {
-      handler(newProduct, oldProduct) {
-        // Ensure oldProduct is not undefined by initializing it properly
-        if (!oldProduct) {
-          this.previousProduct = { ...newProduct };
-          return;
+    // Deep watcher for the user object
+    user: {
+      handler(newUser) {
+        // Check if previousUser is set
+        if (this.previousUser) {
+          // Check if any nested property has changed
+          if (newUser.name !== this.previousUser.name) {
+            this.message = `Name changed from ${this.previousUser.name} to ${newUser.name}.`;
+          } else if (newUser.age !== this.previousUser.age) {
+            this.message = `Age changed from ${this.previousUser.age} to ${newUser.age}.`;
+          } else {
+            this.message = 'No changes detected.';
+          }
+        } else {
+          this.message = 'Initial load: No previous data to compare.';
         }
 
-        // Store the old product state
-        this.previousProduct = { ...oldProduct };
-
-        // Update the change message
-        this.updateChangeMessage(newProduct, oldProduct);
+        // Update previousUser to the current state
+        this.previousUser = { ...newUser };
       },
       deep: true,  // Enable deep watching
       immediate: true  // Run the watcher immediately upon component creation
-    }
-  },
-  computed: {
-    // Computed property for change message
-    changeMessage() {
-      // Check if any part of the product object has changed
-      const hasChanged = JSON.stringify(this.previousProduct) !== JSON.stringify(this.product);
-      return hasChanged ? 'The product has been updated.' : 'No changes detected.';
-    }
-  },
-  methods: {
-    // Method to update the change message based on product changes
-    updateChangeMessage(newProduct, oldProduct) {
-      let message = '';
-
-      // Compare prices
-      if (newProduct.price !== oldProduct.price) {
-        message += 'Price has changed. ';
-      }
-
-      // Compare product names
-      if (newProduct.details.name !== oldProduct.details.name) {
-        message += 'Product name has changed. ';
-      }
-
-      // If there are changes, update changeMessage computed property
-      if (message) {
-        this.previousProduct = { ...newProduct }; // Update previousProduct
-        this.$nextTick(() => {
-          this.changeMessage = message.trim(); // Update changeMessage
-        });
-      }
     }
   }
 };
@@ -90,5 +62,6 @@ input {
 }
 p {
   margin-top: 20px;
+  font-weight: bold;
 }
 </style>
