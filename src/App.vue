@@ -1,31 +1,32 @@
 <template>
   <div id="app">
-    <PostIndia id="myid" headLine="Attack On navy" subject="we are WOn" :isAdult="true" />
-    <h1>{{ name }}</h1>
-    <ChildA />
+    <!-- Button to trigger the popup -->
+    <button @click="showpop=true">Show Popup</button>
+
+    <!-- PopUp component with v-show directive and close event -->
+    <PopUp v-show="showpop" @close="closepop" />
   </div>
 </template>
 
 <script>
-import PostIndia from "./components/PostIndia.vue";
-import ChildA from "./components/ChildA.vue";
+import PopUp from './components/PopUp.vue';
 
 export default {
   name: "App",
-  components: {
-    PostIndia,
-    ChildA
-  },
   data() {
     return {
-      name: 'shivaprasad'
+      showpop: false // State to control the visibility of the popup
     };
   },
-  provide() {
-    // Provide 'username' as a reactive property to descendants
-    return {
-      username: this.name
-    };
+  components: {
+    PopUp
+  },
+  methods: {
+    // Method to handle the close event from PopUp component
+    closepop(username) {
+      this.showpop = false;
+      console.log(username);
+    }
   }
 };
 </script>
@@ -40,3 +41,7 @@ export default {
   margin-top: 60px;
 }
 </style>
+
+
+/* for custom component v-model confuse to store value in root level when we use custom component 
+please use props in that compoennet as modelValue:stirng and use as :value in element where v-model used*/
