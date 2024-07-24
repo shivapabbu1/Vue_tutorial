@@ -2,8 +2,8 @@
   <div>
     <!-- Display and change name -->
     <h2>{{ name }}</h2>
-    <button @click="changeName()">Change Name</button>
-    <button @click="changeName(); increment()">Change Name and Increment</button>
+    <button v-on:click="changeName">Change Name</button>
+    <button @click="changeName();increment()">Change Name and Increment</button>
 
     <!-- Display and manipulate count -->
     <div>
