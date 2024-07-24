@@ -1,33 +1,70 @@
 <template>
   <div id="app">
-    <!-- Button to trigger the popup -->
-    <button @click="showpop=true">Show Popup</button>
+    <CardWithSlot>
+      <template v-slot:header>
+        <h2>Card Title</h2>
+      </template>
+      <template v-slot:default>
+        <img src="https://picsum.photos/200" />
+      </template>
+      <template v-slot:footer>
+      <p>footer</p>
+      </template>
+    </CardWithSlot>
 
-    <!-- PopUp component with v-show directive and close event -->
-    <PopUp v-show="showpop" @close="closepop" />
+    <CardWithSlot>
+    <template v-slot:header>
+        <h2>Card for future</h2>
+      </template>
+     <template v-slot:default>
+        <img src="https://picsum.photos/200" />
+      </template>
+      <template v-slot:footer>
+      <p>footer</p>
+      </template>
+    </CardWithSlot>
+
+    <CardWithSlot>
+    <template v-slot:header>
+        <h2>Card for scope</h2>
+      </template>
+     <template v-slot:default>
+        <img src="https://picsum.photos/200" />
+      </template>
+      <template v-slot:footer>
+      <p>footer 1</p>
+      </template>
+    </CardWithSlot>
+
+
+   
+    <!-- Using the LIstNames component with a default slot -->
+    <div>
+      <LIstNames>
+        <template v-slot:default="slotProps">
+          {{ slotProps.firstName }} -{{ slotProps.lastName }}
+        </template>
+      </LIstNames>
+
+
+      <LIstNames>
+        <template v-slot:default="slotProps">
+          {{ slotProps.firstName }} 
+        </template>
+      </LIstNames>
+    </div>
   </div>
 </template>
 
 <script>
-import PopUp from './components/PopUp.vue';
-
+import CardWithSlot from './components/CardWithSlot.vue';
+import LIstNames from './components/LIstNames.vue';
 export default {
   name: "App",
-  data() {
-    return {
-      showpop: false // State to control the visibility of the popup
-    };
-  },
   components: {
-    PopUp
+    CardWithSlot,LIstNames
   },
-  methods: {
-    // Method to handle the close event from PopUp component
-    closepop(username) {
-      this.showpop = false;
-      console.log(username);
-    }
-  }
+ 
 };
 </script>
 
@@ -43,5 +80,10 @@ export default {
 </style>
 
 
-/* for custom component v-model confuse to store value in root level when we use custom component 
-please use props in that compoennet as modelValue:stirng and use as :value in element where v-model used*/
+
+/* slots:
+props are strict parent-child realtion,so  parent can only pass differnt data to children
+where as slots are powerful parent component to control content inside the child content
+
+-->named slots
+*/
