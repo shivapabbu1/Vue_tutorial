@@ -1,35 +1,30 @@
 <template>
   <div id="app">
     <h1>AppComponent</h1>
-    <button @click="showModal = true">Open Modal</button>
-    <TelePort v-if="showModal" @close="closemodel()"/>
-  
-  <button></button>
-    <teleport to="#tele-port" >
-      <PortalComp/>
-    
+    <button @click="showParentComponent = !showParentComponent">
+      Toggle Parent Component
+    </button>
+    <ParentComponent v-if="showParentComponent"/>
 
-  </teleport>
+    <div>
+      <ProfileList/>
+    </div>
   </div>
 </template>
 
 <script>
-import PortalComp from './components/PortalComp.vue';
-import TelePort from './components/TelePort.vue';
+import ParentComponent from './components/ParentComponent.vue';
+import ProfileList from './components/ProfileList.vue';
 export default {
   name: 'App',
   components: {
-    PortalComp,
-    TelePort
+    ParentComponent,
+    ProfileList
   },
   data() {
     return {
-      showModal: false
+      showParentComponent: true
     };
-  },methods:{
-    closemodel(){
-      this.showModal=false
-    }
   }
 };
 </script>
@@ -42,5 +37,17 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+button {
+  margin: 10px;
+  padding: 10px;
+  background-color: #42b983;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+button:hover {
+  background-color: #2c9e6a;
 }
 </style>
