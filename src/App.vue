@@ -1,36 +1,35 @@
 <template>
   <div id="app">
-    <div class="tabs">
-      <button @click="activeTab = 'DynamicA'">Tab A</button>
-      <button @click="activeTab = 'DynamicB'">Tab B</button>
-      <button @click="activeTab = 'DynamicC'">Tab C</button>
-    </div>
+    <h1>AppComponent</h1>
+    <button @click="showModal = true">Open Modal</button>
+    <TelePort v-if="showModal" @close="closemodel()"/>
+  
+  <button></button>
+    <teleport to="#tele-port" >
+      <PortalComp/>
     
-    <keep-alive>
-      <component :is="activeTab" />
-    </keep-alive>
 
-    <!-- <component :is="activeTab" /> -->
-   
+  </teleport>
   </div>
 </template>
 
 <script>
-import DynamicA from './components/Dynamic/DynamicA.vue';
-import DynamicB from './components/Dynamic/DynamicB.vue';
-import DynamicC from './components/Dynamic/DynamicC.vue';
-
+import PortalComp from './components/PortalComp.vue';
+import TelePort from './components/TelePort.vue';
 export default {
   name: 'App',
   components: {
-    DynamicA,
-    DynamicB,
-    DynamicC
+    PortalComp,
+    TelePort
   },
   data() {
     return {
-      activeTab: 'DynamicA'  // Default tab
+      showModal: false
     };
+  },methods:{
+    closemodel(){
+      this.showModal=false
+    }
   }
 };
 </script>
@@ -44,6 +43,4 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-
-
 </style>
