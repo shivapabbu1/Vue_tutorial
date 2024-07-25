@@ -6,7 +6,12 @@
       <button @click="activeTab = 'DynamicC'">Tab C</button>
     </div>
     
-    <component :is="activeTab" />
+    <keep-alive>
+      <component :is="activeTab" />
+    </keep-alive>
+
+    <!-- <component :is="activeTab" /> -->
+   
   </div>
 </template>
 
