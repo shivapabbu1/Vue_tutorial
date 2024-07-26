@@ -1,19 +1,20 @@
 <template>
   <div>
-<DemoONe/>
-<DemoTwo/>
+    <OptComponent/>
+<CompComponent/>
   </div>
 </template>
 
 <script>
-import DemoONe from './components/DemoONe.vue';
-import DemoTwo from './components/DemoTwo.vue';
+import OptComponent from './components/OptComponent.vue';
+import CompComponent from './components/CompComponent.vue';
   export default {
     name :'App',
     components:{
-      DemoONe,
-      DemoTwo
+      OptComponent,
+      CompComponent
     }
+
   }
 </script>
 
