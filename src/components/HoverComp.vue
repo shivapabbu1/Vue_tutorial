@@ -8,7 +8,18 @@
 import CounerMixin from "./MIxins/Counter"
     export default {
         name: 'HoverComp',
-        mixins: [CounerMixin]
+        mixins: [CounerMixin],
+        data(){
+            return{
+                count :20
+            }
+        },
+        methods:{
+            increment(){
+             this.count +=2;
+            }
+        }
+        
     }
 </script>
 
