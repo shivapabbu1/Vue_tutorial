@@ -1,7 +1,12 @@
 <template>
     <div>
       <!-- DOM element manipulation -->
-      <div ref="myDiv">This is a div element</div>
+      <div ref="myDiv">
+        
+       This is a div element
+      
+       <input type="text" id="name" ref="nameinput"/>
+        </div>
   
       <!-- Accessing child component methods and properties -->
       <TempChild ref="childComp" />
@@ -33,6 +38,7 @@
     },
     mounted() {
       console.log(this.$refs.myDiv); // Access the div element
+      this.$refs.nameinput.focus();
     },
     methods: {
       manipulateDomElement() {
