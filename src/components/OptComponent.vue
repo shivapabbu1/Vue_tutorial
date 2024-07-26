@@ -17,6 +17,7 @@
       <ul>
         <li v-for="(person, index) in people" :key="index">
           {{ formattedPerson(person) }}
+          <button @click="updateRole(index)">Update Role</button>
           <button @click="removePerson(index)">Remove</button>
         </li>
       </ul>
@@ -34,7 +35,7 @@
           lname: '',
           role: ''
         },
-        people: []
+        people: [] // Array of people with nested properties
       };
     },
     computed: {
@@ -45,7 +46,10 @@
     },
     methods: {
       addPerson() {
-        this.people.push({ ...this.newPerson });
+        this.people.push({
+          ...this.newPerson,
+          details: { joined: new Date().toISOString() } // Adding a nested property
+        });
         this.newPerson.fname = '';
         this.newPerson.lname = '';
         this.newPerson.role = '';
@@ -53,9 +57,24 @@
       removePerson(index) {
         this.people.splice(index, 1);
       },
+      updateRole(index) {
+        // Example of modifying a nested property
+        this.rol(this.people[index], 'role', 'Updated Role');
+      },
       // Method to format person's details
       formattedPerson(person) {
-        return `${person.fname} ${person.lname} - ${person.role}`;
+        return `${person.fname} ${person.lname} - ${person.role} (Joined: ${person.details.joined})`;
+      }
+    },
+    watch: {
+      // Deep watcher for the 'people' array
+      people: {
+        handler(newValue, oldValue) {
+          console.log("People array changed:");
+          console.log("Old Value:", oldValue);
+          console.log("New Value:", newValue);
+        },
+        deep: true // Watches changes at any level within the nested objects
       }
     }
   };
