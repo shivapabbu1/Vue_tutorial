@@ -1,25 +1,66 @@
 <template>
   <div id="app">
-    <TempParent />
+  
+    <h1>hello form options {{ name1 }}</h1>
+    <h2>hello from compostions with name {{ fname }} {{ lname }} as {{ role }}</h2>
     <div>
-      <CounterComp/>
-      <HoverComp/>
+<h1>{{ qusn }}</h1>
+    <p>{{ ans }}</p>
     </div>
-  </div>
+
+    <div>
+      <h2>{{ greetfromreactive }}</h2>
+      <p>{{ ansformreactive }}</p>
+    </div>
+
+    </div>
 </template>
 
 <script>
-import TempParent from './components/TempParent.vue';
-import CounterComp from './components/CounterComp.vue';
-import HoverComp from './components/HoverComp.vue';
+
+import { reactive, ref } from 'vue';
+
 export default {
   name: 'App',
-  components: {
-    TempParent,
-    HoverComp,
-    CounterComp
+  setup() {
+
+
+    const state=reactive({
+    fname:'kiran',
+    lname:'kommu',
+    role:'Fullstack developer'
+   })
+      
+    // Create a reactive reference for the count
+    const fname = ref("shivaprasad");
+    const lname=ref("pabbu")
+    const role=ref("developer")
+   
+    const qusn= `Hello ${fname.value}  ${lname.value}.What are you?`
+    const ans=`hey.. i am ${role.value}`
+
+    const greetfromreactive=`Hello ${state.fname}  ${state.lname}.What are you?`
+    const ansformreactive=`hey.. i am ${state.role}`
+ 
+  
+    // Return the refs and methods to the template
+    return {
+      fname,
+      lname,
+      role,qusn,ans
+      ,
+      greetfromreactive,
+      ansformreactive
+      
+    
+    };
+  },
+  data(){
+    return {
+      name1: 'shivapabbu'
+    }
   }
-}
+};
 </script>
 
 <style>
@@ -32,3 +73,4 @@ export default {
   margin-top: 60px;
 }
 </style>
+``
