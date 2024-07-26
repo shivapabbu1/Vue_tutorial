@@ -1,16 +1,23 @@
 <template>
   <div id="app">
     <TempParent />
+    <div>
+      <CounterComp/>
+      <HoverComp/>
+    </div>
   </div>
 </template>
 
 <script>
 import TempParent from './components/TempParent.vue';
-
+import CounterComp from './components/CounterComp.vue';
+import HoverComp from './components/HoverComp.vue';
 export default {
   name: 'App',
   components: {
-    TempParent
+    TempParent,
+    HoverComp,
+    CounterComp
   }
 }
 </script>
