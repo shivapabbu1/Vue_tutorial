@@ -1,20 +1,26 @@
 <template>
   <div id="app">
-    <ShoppingCart />
+    <ParentComp />
+
+    <div>
+      <ShoppingCart/>
+    </div>
   </div>
 </template>
 
 <script>
-import ShoppingCart from "../src/components/ShoppingCart.vue";
+import ParentComp from './components/ParentComp.vue';
+import ShoppingCart from './components/ShoppingCart.vue';
+
 
 export default {
   name: "App",
   components: {
+    ParentComp,
     ShoppingCart
   }
 };
 </script>
-
 
 <style>
 #app {
