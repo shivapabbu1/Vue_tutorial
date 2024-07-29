@@ -5,12 +5,17 @@
 
     <!-- PopUp component with v-show directive and close event -->
     <PopUp v-show="showpop" @close="closepop" />
+
+<!-- Button to trigger the popup -->
+<button @click="showpopc=true">Show c Popup</button>
+    <AnotherPopUP v-show="showpopc" @close="closeAnotherPopUp"  />
   </div>
 </template>
 
 <script>
 import PopUp from './components/PopUp.vue';
-
+import AnotherPopUP from './components/AnotherPopUP.vue';
+import {ref} from 'vue'
 export default {
   name: "App",
   data() {
@@ -19,7 +24,8 @@ export default {
     };
   },
   components: {
-    PopUp
+    PopUp,
+    AnotherPopUP
   },
   methods: {
     // Method to handle the close event from PopUp component
@@ -27,6 +33,23 @@ export default {
       this.showpop = false;
       console.log(username);
     }
+  },
+
+  setup() {
+    const showpopc = ref(false);
+
+  
+
+    const closeAnotherPopUp = (name) => {
+      showpopc.value = false;
+      console.log('AnotherPopUP closed by:', name);
+    };
+
+    return {
+      showpopc,
+    
+      closeAnotherPopUp
+    };
   }
 };
 </script>
