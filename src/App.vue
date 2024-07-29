@@ -1,6 +1,8 @@
 <template>
   <div id="app">
+    <keep-alive>
     <TempParent />
+  </keep-alive>
    
   </div>
 </template>

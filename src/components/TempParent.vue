@@ -1,11 +1,8 @@
-
-
-
 <template>
   <div>
     <!-- DOM element manipulation -->
     <div ref="myDiv">
-     <h1  ref="text"> This is a div element</h1>
+      <h1 ref="text">This is a div element</h1>
       <input type="text" id="name" ref="nameinput"/>
     </div>
 
@@ -20,11 +17,11 @@
     <!-- Button to trigger methods -->
     <button @click="manipulateDomElement">Manipulate DOM Element</button>
     <button @click="callChildMethod">Call Child Method</button>
-    <button @click="logDynamicRefs">Log Dynamic Refs</button>
   </div>
 </template>
+
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onBeforeMount, onBeforeUnmount, onUnmounted, onActivated, onDeactivated, } from 'vue';
 import TempChild from './TempChild.vue';
 
 export default {
@@ -57,18 +54,38 @@ export default {
       }
     };
 
-    // Function to log dynamic refs
-    const logDynamicRefs = () => {
-      items.value.forEach((item, index) => {
-        console.log((childComp.value.$refs['item' + index] || null)); // Access dynamic refs from child component
-      });
-    };
+
+    // Lifecycle hook for before mount
+    onBeforeMount(() => {
+      console.log('Before Parent component is mounted');
+    });
 
     // Lifecycle hook for mounted
     onMounted(() => {
+      console.log('Parent component mounted');
       if (nameinput.value) {
         nameinput.value.focus();
       }
+    });
+
+    // Lifecycle hook for before unmount
+    onBeforeUnmount(() => {
+      console.log('Before Parent component is unmounted');
+    });
+
+    // Lifecycle hook for unmounted
+    onUnmounted(() => {
+      console.log('Parent component unmounted');
+    });
+
+    // Lifecycle hook for activated (used in keep-alive)
+    onActivated(() => {
+      console.log('Parent component activated');
+    });
+
+    // Lifecycle hook for deactivated (used in keep-alive)
+    onDeactivated(() => {
+      console.log('Parent component deactivated');
     });
 
     return {
@@ -79,12 +96,11 @@ export default {
       items,
       manipulateDomElement,
       callChildMethod,
-      logDynamicRefs
+     
     };
   }
 };
 </script>
-
 
 <style scoped>
 /* Add some basic styling */
@@ -95,4 +111,3 @@ button {
   margin: 5px;
 }
 </style>
-
