@@ -2,6 +2,7 @@
   <div id="app">
     <PostIndia id="myid" headLine="Attack On navy" subject="we are WOn" :isAdult="true" />
     <h1>{{ name }}</h1>
+
     <ChildA />
   </div>
 </template>
@@ -9,7 +10,7 @@
 <script>
 import PostIndia from "./components/PostIndia.vue";
 import ChildA from "./components/ChildA.vue";
-
+import { provide ,reactive,ref} from "vue";
 export default {
   name: "App",
   components: {
@@ -22,11 +23,31 @@ export default {
     };
   },
   provide() {
-    // Provide 'username' as a reactive property to descendants
+  
     return {
       username: this.name
     };
+  },
+
+  setup() {
+    // Define a ref
+    const nameRef = ref('c_shivaprasad');
+
+    // Define a reactive state object
+    const state = reactive({
+      r_name: 'shivaprasad_reactive'
+    });
+
+    // Provide both ref and reactive state
+    provide('usernameRef', nameRef);
+    provide('usernameReactive', state);
+
+    // Return reactive state to be used in template
+    return {
+      r_name: state.r_name
+    };
   }
+
 };
 </script>
 
