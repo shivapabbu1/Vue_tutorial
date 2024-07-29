@@ -4,6 +4,11 @@
     <h1>{{ name }}</h1>
 
     <ChildA />
+
+    <div>
+      <!-- <CounterApp/> -->
+      <HoverApp/>
+    </div>
   </div>
 </template>
 
@@ -11,11 +16,15 @@
 import PostIndia from "./components/PostIndia.vue";
 import ChildA from "./components/ChildA.vue";
 import { provide ,reactive,ref} from "vue";
+// import CounterApp from "./components/CounterApp.vue";
+import HoverApp from "./components/HoverApp.vue";
 export default {
   name: "App",
   components: {
     PostIndia,
-    ChildA
+    ChildA,
+    // CounterApp,
+    HoverApp
   },
   data() {
     return {
