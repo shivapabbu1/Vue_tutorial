@@ -1,12 +1,18 @@
 <template>
     <div>
 <h1>hello home</h1>
+ <MyButton>PLEASE CLICK</MyButton>
     </div>
 </template>
 
 <script>
+import {MyButton} from "component_pabbu"
     export default {
-        name:'HomeApp'
+  
+        name:'HomeApp',
+        components:{
+            MyButton,
+        }
     }
 </script>
 

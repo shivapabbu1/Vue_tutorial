@@ -6,12 +6,19 @@
       <router-link to="/contact">Contact</router-link>
     </nav>
     <router-view></router-view>
+
+    
+
+
+
   </div>
 </template>
 
 <script>
+
 export default {
-  name: 'App'
+  name: 'App',
+  
 };
 </script>
 
