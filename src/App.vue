@@ -7,7 +7,7 @@
     </nav>
     <router-view></router-view>
 
-    
+   
 
 
 
@@ -16,7 +16,9 @@
 
 <script>
 
+
 export default {
+
   name: 'App',
   
 };

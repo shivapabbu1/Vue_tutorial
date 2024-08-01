@@ -11,7 +11,11 @@
     "component_pabbu": "^0.1.0",
     "component-shiva": "^0.1.0",
     "core-js": "^3.8.3",
+    "pabbu_components": "^0.1.0",
+    "shivapabbu1_comp": "^0.1.0",
+    "shivapabbu1_lib": "^0.1.0",
     "vue": "^3.2.13",
+    "vue-component-sp": "^1.0.0",
     "vue-router": "^4.4.0"
   },
   "devDependencies": {
